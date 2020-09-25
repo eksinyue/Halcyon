@@ -12,11 +12,6 @@ Backend API hosted on [Heroku](https://agile-peak-18205.herokuapp.com/)
 
 ## Team members and contributions
 
-Adam
-Kevin
-Gabriel Tan Chuan En A0166733Y
-Xinyue
-
 | Name                 | Matric Number | Role                  |
 | -------------------- | ------------- | --------------------- |
 | Adam Chew Yong Soon  | A0169886B     | Backend               |
