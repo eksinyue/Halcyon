@@ -1,3 +1,4 @@
+import { snakeCase } from "change-case";
 import { Message } from "./types";
 
 export enum Sender {
@@ -34,7 +35,9 @@ export const toReadableChat = (
     id: chat.id,
     type: "received",
     voiceMessage: chat.url,
-    avatar: `https://api.adorable.io/avatars/285/${otherPartyAlias}.png`,
+    avatar: `https://api.adorable.io/avatars/285/${snakeCase(
+      otherPartyAlias
+    )}.png`,
     sentAt: chat.createdAt,
     userId: chat.userId,
   };

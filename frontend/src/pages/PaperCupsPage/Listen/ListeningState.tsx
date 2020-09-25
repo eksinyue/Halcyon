@@ -44,6 +44,10 @@ const ListeningState: React.FC<Props> = ({
       setListened(true);
       inst.seekTo(0);
     });
+
+    return () => {
+      inst.stop();
+    };
   }, [wavesurfer, setListened, setIsPlaying]);
 
   const listenStyle = useSpring({

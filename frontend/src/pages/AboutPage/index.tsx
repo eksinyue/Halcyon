@@ -16,7 +16,7 @@ const AboutPage = () => {
       <SimpleTopBar back="/" />
       <PageContent>
         <Bird />
-        <SaneBlock>
+        <SaneBlock className="">
           <Header>Hi,</Header>
           <p className="text-3">
             Halcyon is a self-care application for putting your mind and soul at

@@ -8,7 +8,7 @@ import ConversationEntry from "./ConversationEntry";
 import { OfflineError } from "../../../api/errors";
 import ToastService from "../../../services/ToastService";
 import { PinkButton } from "../../../components/CustomButton";
-import { capitalCase } from "change-case";
+import { capitalCase, snakeCase } from "change-case";
 import LocalDatabase from "../../../utils/LocalDatabase";
 import SaneBlock from "../../../components/SaneBlock";
 
@@ -82,7 +82,9 @@ const PaperCupsConversations = () => {
               <ConversationEntry
                 key={i}
                 id={convo.id}
-                avatarUrl={`https://api.adorable.io/avatars/285/${convo.alias}.png`}
+                avatarUrl={`https://api.adorable.io/avatars/285/${snakeCase(
+                  convo.alias
+                )}.png`}
                 name={capitalCase(convo.alias || "Anonymous")}
                 unreadCount={0}
               />

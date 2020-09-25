@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import { MutedButton, PinkButton } from "../../../components/CustomButton";
 import MicrophoneCard from "../Speak/MicrophoneCard";
@@ -29,6 +29,12 @@ const ReplyState: React.FC<Props> = ({
     setReplyBlob(null);
     setWavesurfer(null);
   };
+
+  useEffect(() => {
+    return () => {
+      recorder.stop();
+    };
+  }, [recorder]);
 
   return (
     <>

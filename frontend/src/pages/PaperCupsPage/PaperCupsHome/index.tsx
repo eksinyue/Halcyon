@@ -41,11 +41,17 @@ const PaperCupsHome = () => {
 
 const PaperCupsImage = styled.div`
   position: relative;
-  height: 220px;
-  max-height: 220px;
   background: url(${PaperCupsPNG}) no-repeat;
   background-position: center;
   background-size: contain;
+
+  @media (max-height: 700px) {
+    height: 0px;
+  }
+
+  @media (min-height: 701px) {
+    height: 220px;
+  }
 `;
 
 const BirdPairContainer = styled.div`

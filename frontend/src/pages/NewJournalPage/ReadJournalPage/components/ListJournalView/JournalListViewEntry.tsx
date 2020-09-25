@@ -12,27 +12,20 @@ interface Props {
 const JournalListViewEntry: React.FC<Props> = ({ entry }) => {
   return (
     <HCenteredRow
-      className='mb-2 align-items-center blue-text pointer'
+      className="mb-2 align-items-center blue-text pointer"
       onClick={() => {
         f7.views.main.router.navigate(
           `/journal/entries/${format(entry.createdAt, "yyyy-MM-dd")}`
         );
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-        className='text-align-center p-2'
-      >
-        <p className='text-3 m-0'>{format(entry.createdAt, "MMM")}</p>
-        <p className='text-1 m-0'>{format(entry.createdAt, "dd")}</p>
+      <div className="display-flex flex-direction-column justify-content-center text-align-center p-2">
+        <p className="text-3 m-0">{format(entry.createdAt, "MMM")}</p>
+        <p className="text-1 m-0">{format(entry.createdAt, "dd")}</p>
       </div>
       <MoodRenderer mood={entry.mood} size={50} />
-      <div style={{ flexGrow: 1 }} className='p-2'>
-        <p className='text-3'>{entry.block.prompt}</p>
+      <div style={{ flexGrow: 1 }} className="p-2">
+        <p className="text-3">{entry.block.prompt}</p>
       </div>
     </HCenteredRow>
   );

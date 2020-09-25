@@ -29,7 +29,7 @@ const DiaryContainer: React.FC<{}> = ({ children }) => {
     <FlexRow style={{ height: "95%" }}>
       <LeftPage />
       <Diary>
-        <SaneBlock>{children}</SaneBlock>
+        <SaneBlock className="p-0">{children}</SaneBlock>
       </Diary>
     </FlexRow>
   );

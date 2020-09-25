@@ -1,22 +1,22 @@
-import styled from "@emotion/styled";
-import { Block, f7, Page, Icon } from "framework7-react";
-import React, { useEffect, useState } from "react";
+import styled from '@emotion/styled';
+import { Block, f7, Page, Icon } from 'framework7-react';
+import React, { useEffect, useState } from 'react';
 import {
   loginUser,
   registerUser,
   loginWithFacebook,
   loginAsGuest,
-} from "../../api";
-import { OfflineError } from "../../api/errors";
-import Colors from "../../colors";
-import { YellowButton, MutedButton } from "../../components/CustomButton";
-import CustomInput from "../../components/CustomInput";
-import useIfLoggedIn from "../../hooks/useIfLoggedIn";
-import ToastService from "../../services/ToastService";
-import LocalDatabase from "../../utils/LocalDatabase";
-import BirbPNG from "./Birb.png";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import HDivider from "../../components/HDivider";
+} from '../../api';
+import { OfflineError } from '../../api/errors';
+import Colors from '../../colors';
+import { YellowButton, MutedButton } from '../../components/CustomButton';
+import CustomInput from '../../components/CustomInput';
+import useIfLoggedIn from '../../hooks/useIfLoggedIn';
+import ToastService from '../../services/ToastService';
+import LocalDatabase from '../../utils/LocalDatabase';
+import BirbPNG from './Birb.png';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import HDivider from '../../components/HDivider';
 
 enum Route {
   Default,
@@ -27,8 +27,8 @@ enum Route {
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [route, setRoute] = useState<Route>(Route.Default);
 
   useIfLoggedIn();
@@ -45,13 +45,13 @@ const LoginPage = () => {
     token: string,
     refreshToken: string,
     userId: string,
-    toastMsg: string = "Signed up successfully!"
+    toastMsg: string = 'Signed up successfully!'
   ) => {
     await LocalDatabase.saveAuthToken(token, refreshToken);
     await LocalDatabase.setUserId(userId);
     ToastService.toastBottom(toastMsg);
     f7.views.main.router.allowPageChange = true;
-    f7.views.main.router.navigate("/");
+    f7.views.main.router.navigate('/');
   };
 
   const signup = async () => {
@@ -65,7 +65,7 @@ const LoginPage = () => {
     } catch (e) {
       if (e instanceof OfflineError) {
         ToastService.toastBottom(
-          "You are offline. Please connect to the Internet before signing up. If you want, you can use some of our features as a guest first."
+          'You are offline. Please connect to the Internet before signing up. If you want, you can use some of our features as a guest first.'
         );
       } else {
         if (e.response?.status === 409) {
@@ -73,7 +73,7 @@ const LoginPage = () => {
             `This email has already been taken. Did you want to sign in instead?`
           );
         } else {
-          ToastService.toastBottom("Could not sign up.");
+          ToastService.toastBottom('Could not sign up.');
         }
       }
     } finally {
@@ -92,15 +92,15 @@ const LoginPage = () => {
         token,
         refreshToken,
         userId,
-        "Logged in successfully!"
+        'Logged in successfully!'
       );
     } catch (e) {
       if (e instanceof OfflineError) {
         ToastService.toastBottom(
-          "You are offline. Please connect to the Internet before logging in."
+          'You are offline. Please connect to the Internet before logging in.'
         );
       } else {
-        ToastService.toastBottom("Could not login.");
+        ToastService.toastBottom('Could not login.');
       }
     } finally {
       setLoading(false);
@@ -119,18 +119,18 @@ const LoginPage = () => {
         token,
         refreshToken,
         userId,
-        "Logged in successfully via Facebook!"
+        'Logged in successfully via Facebook!'
       );
     } catch (e) {
       if (e instanceof OfflineError) {
         ToastService.toastBottom(
-          "You are offline. Please connect to the Internet before logging in. If you want, you can use some of our features as a guest first."
+          'You are offline. Please connect to the Internet before logging in. If you want, you can use some of our features as a guest first.'
         );
       } else {
         if (e.response?.status === 401) {
-          ToastService.toastBottom("Wrong email or password.");
+          ToastService.toastBottom('Wrong email or password.');
         } else {
-          ToastService.toastBottom("Could not login.");
+          ToastService.toastBottom('Could not login.');
         }
       }
     } finally {
@@ -146,7 +146,7 @@ const LoginPage = () => {
         token,
         refreshToken,
         userId,
-        "Signed in as guest"
+        'Signed in as guest'
       );
     } catch (e) {
       if (e instanceof OfflineError) {
@@ -154,13 +154,13 @@ const LoginPage = () => {
         await LocalDatabase.queueGuestAccount();
         ToastService.toastBottom(
           // "You are offline. Please connect to the Internet before logging in."
-          "We will create your guest account once you are online. Meanwhile, you will have limited functionality within the application."
+          'We will create your guest account once you are online. Meanwhile, you will have limited functionality within the application.'
         );
 
         f7.views.main.router.allowPageChange = true;
-        f7.views.main.router.navigate("/");
+        f7.views.main.router.navigate('/');
       } else {
-        ToastService.toastBottom("Could not login.");
+        ToastService.toastBottom('Could not login.');
       }
     } finally {
       setLoading(false);
@@ -211,7 +211,7 @@ const LoginPage = () => {
           <>
             <YellowButton
               className="mb-4"
-              style={{ width: "200px" }}
+              style={{ width: '200px' }}
               onClick={() => setRoute(Route.Signup)}
             >
               Sign up
@@ -219,7 +219,7 @@ const LoginPage = () => {
 
             <YellowButton
               className="mb-4"
-              style={{ width: "200px" }}
+              style={{ width: '200px' }}
               onClick={() => setRoute(Route.Login)}
             >
               Log in
@@ -230,7 +230,7 @@ const LoginPage = () => {
         return (
           <>
             <YellowButton
-              style={{ width: "200px" }}
+              style={{ width: '200px' }}
               className="mb-4"
               onClick={login}
               loading={loading}
@@ -250,7 +250,7 @@ const LoginPage = () => {
           <>
             <YellowButton
               className="mb-4"
-              style={{ width: "200px" }}
+              style={{ width: '200px' }}
               onClick={signup}
               loading={loading}
             >
@@ -272,16 +272,16 @@ const LoginPage = () => {
       <Block
         className="fullwidth"
         style={{
-          maxWidth: "400px",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          maxWidth: '400px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
         <div
           className="fullwidth"
-          style={{ height: "300px", position: "relative" }}
+          style={{ height: '300px', position: 'relative' }}
         >
           <Birb />
         </div>
@@ -289,7 +289,7 @@ const LoginPage = () => {
         <div>{renderButtons()}</div>
         <MutedButton
           className="mb-3"
-          style={{ width: "200px" }}
+          style={{ width: '200px' }}
           onClick={onLoginGuest}
         >
           Proceed as guest
@@ -299,6 +299,7 @@ const LoginPage = () => {
           appId="330612548273394"
           autoLoad={false}
           callback={onLoginFacebook}
+          disableMobileRedirect={true}
           render={(renderProps: any) => (
             <MutedButton className="mb-4" onClick={renderProps.onClick}>
               <Icon f7="logo_facebook" />

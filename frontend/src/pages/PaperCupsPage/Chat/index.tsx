@@ -23,7 +23,7 @@ import ChatAppBar from "./ChatAppBar";
 import ChatBox from "./ChatBox";
 import ChatHistory from "./ChatHistory";
 import { Conversation } from "./types";
-import { capitalCase } from "change-case";
+import { capitalCase, snakeCase } from "change-case";
 
 interface Props {
   id: string;
@@ -177,9 +177,9 @@ const Chat: React.FC<Props> = ({ id }) => {
     >
       <ChatAppBar
         name={capitalCase(otherParty?.alias || "Anonymous")}
-        avatarUrl={`https://api.adorable.io/avatars/285/${
+        avatarUrl={`https://api.adorable.io/avatars/285/${snakeCase(
           otherParty?.alias || "Anonymous"
-        }.png`}
+        )}.png`}
       />
       <ChatBox
         onMicPress={startRecord}

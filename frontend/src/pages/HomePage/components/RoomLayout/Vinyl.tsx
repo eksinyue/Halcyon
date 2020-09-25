@@ -90,19 +90,19 @@ const MusicNote = styled.div<{ left: number; delay: number; duration: number }>`
 const notes = [
   {
     left: 20,
-    note: `𝅗𝅥`,
+    note: `♩`,
     delay: 0,
     animation: 3,
   },
   {
     left: 50,
-    note: `𝅘𝅥`,
+    note: `♩`,
     delay: 0.5,
     animation: 2.3,
   },
   {
     left: 80,
-    note: `𝅘𝅥𝅯`,
+    note: `♬`,
     delay: 0.8,
     animation: 2.8,
   },

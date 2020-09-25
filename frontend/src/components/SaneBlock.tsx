@@ -3,6 +3,6 @@ import styled from "@emotion/styled";
 
 export default styled(Block)`
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
 `;

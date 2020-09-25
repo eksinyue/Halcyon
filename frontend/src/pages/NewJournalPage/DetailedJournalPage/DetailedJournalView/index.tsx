@@ -14,9 +14,9 @@ interface Props {
 
 const DetailedJournalView: React.FC<Props> = ({ entry }) => {
   return (
-    <Block className='blue-text'>
-      <FlexRow className='justify-content-space-between align-items-center'>
-        <p className='text-2'>
+    <div className="blue-text mt-4">
+      <FlexRow className="justify-content-space-between align-items-center">
+        <p className="text-2">
           <strong>{format(entry.createdAt, "do MMMM yyyy")}</strong>{" "}
         </p>
         <MoodRenderer mood={entry.mood} size={66} />
@@ -31,12 +31,12 @@ const DetailedJournalView: React.FC<Props> = ({ entry }) => {
       <p className='text-4 m-0'>Yours truly,</p>
       <p className='text-2 m-0'>Me</p> */}
 
-      <div className='pt-5' style={{ boxSizing: "border-box" }}>
-        <p className='blue-text text-2 mt-1 mb-1'>{entry.block.prompt}</p>
+      <div className="pt-5" style={{ boxSizing: "border-box" }}>
+        <p className="blue-text text-2 mt-1 mb-1">{entry.block.prompt}</p>
 
-        <p className='text-2'>{entry.block.content}</p>
+        <p className="text-2">{entry.block.content}</p>
       </div>
-    </Block>
+    </div>
   );
 };
 

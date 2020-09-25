@@ -54,6 +54,7 @@ export enum OnboardingTypes {
   App = "app",
   PaperCups = "papercups",
   Diary = "diary",
+  Silent = "silent",
 }
 
 class LocalDatabase {

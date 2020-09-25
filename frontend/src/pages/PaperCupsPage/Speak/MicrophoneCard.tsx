@@ -40,6 +40,9 @@ const MicrophoneCard: React.FC<Props> = ({
         setIsPlaying(false);
         wavesurfer.seekTo(0);
       });
+      return () => {
+        wavesurfer.stop();
+      };
     }
   }, [wavesurfer]);
   const startRecording = useCallback(async () => {
@@ -74,7 +77,7 @@ const MicrophoneCard: React.FC<Props> = ({
 
   return (
     <MicrophoneBox
-      className="p-2"
+      className="p-2 pointer"
       style={boxStyle}
       onClick={
         isRecording

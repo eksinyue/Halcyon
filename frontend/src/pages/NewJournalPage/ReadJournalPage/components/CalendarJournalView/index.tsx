@@ -82,7 +82,7 @@ const CalendarJournalView: React.FC<Props> = ({
     if (entry === undefined) {
       return (
         <>
-          <div className='text-align-center blue-text'>{singleDay + 1}</div>
+          <div className="text-align-center blue-text">{singleDay + 1}</div>
           <Circle color={Colors.primaryTint} />
         </>
       );
@@ -110,22 +110,26 @@ const CalendarJournalView: React.FC<Props> = ({
     }
     return (
       <>
-        <div className='text-align-center blue-text'>{singleDay + 1}</div>
-        <MoodCircle
-          className='no-padding'
-          src={moodSrc}
-          href={`/journal/entries/${entry.id || entry.tempId}`}
-        />
+        <div className="text-align-center blue-text">{singleDay + 1}</div>
+        {entry.mood === undefined || entry.mood === null ? (
+          <Circle color={Colors.primaryTint} />
+        ) : (
+          <MoodCircle
+            className="no-padding"
+            src={moodSrc}
+            href={`/journal/entries/${entry.id || entry.tempId}`}
+          />
+        )}
       </>
     );
   };
 
   return (
-    <FlexRow className='justify-content-space-between'>
+    <FlexRow className="justify-content-space-between">
       {daysOfTheWeek.map((day, i) => (
         <div key={day}>
           <p
-            className='text-align-center blue-text text-2'
+            className="text-align-center blue-text text-2"
             style={{ textTransform: "lowercase" }}
           >
             {day}
@@ -135,14 +139,14 @@ const CalendarJournalView: React.FC<Props> = ({
               <DateContainer key={singleDay}>
                 {singleDay < 0 ? (
                   <>
-                    <div className='text-align-center text-color-gray'>
+                    <div className="text-align-center text-color-gray">
                       {singleDay + daysInPrevMonth}
                     </div>
                     <Circle color={Colors.primaryLight} onClick={toPrevMonth} />
                   </>
                 ) : singleDay >= daysInMonth ? (
                   <>
-                    <div className='text-align-center text-color-gray'>
+                    <div className="text-align-center text-color-gray">
                       {singleDay - daysInMonth + 1}
                     </div>
                     <Circle color={Colors.primaryLight} onClick={toNextMonth} />
