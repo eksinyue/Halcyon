@@ -1,0 +1,82 @@
+$text_sizes: (1.6, 1.2, 1, 0.8);
+
+@for $i from 0 to length($text_sizes) {
+  $size: nth($text_sizes, $i + 1) * 1rem;
+  .text-#{$i + 1} {
+    font-size: $size;
+  }
+}
+
+$sizes: (0, 4, 8, 16, 32, 48, 64, 80, 96);
+
+@for $i from 0 to length($sizes) {
+  $space: nth($sizes, $i + 1) * 1px;
+
+  .ml-#{$i} {
+    margin-left: $space;
+  }
+
+  .mr-#{$i} {
+    margin-right: $space;
+  }
+
+  .mt-#{$i} {
+    margin-top: $space;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: $space;
+  }
+
+  .m-#{$i} {
+    margin: $space;
+  }
+
+  .pl-#{$i} {
+    padding-left: $space;
+  }
+
+  .pr-#{$i} {
+    padding-right: $space;
+  }
+
+  .pt-#{$i} {
+    padding-top: $space;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: $space;
+  }
+
+  .p-#{$i} {
+    padding: $space;
+  }
+}
+
+.fullheight {
+  height: 100% !important;
+}
+
+.fullwidth {
+  width: 100% !important;
+}
+
+.blue-text {
+  color: #657784; // for text
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.roundier {
+  border-radius: 16px;
+}
+
+.border-box {
+  box-sizing: border-box;
+}

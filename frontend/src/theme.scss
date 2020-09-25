@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+/* Custom color theme for F7 */
+$primary-color: #9caebc;
+
+/* Custom color theme */
+:root {
+  --f7-theme-color: $primary-color;
+  --f7-theme-color-rgb: 156, 174, 188;
+  --f7-theme-color-shade: #849aac;
+  --f7-theme-color-tint: #b4c2cc;
+
+  /* Custom font */
+  --f7-font-family: EB Garamond, -apple-system, SF Pro Text, SF UI Text,
+    system-ui, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
