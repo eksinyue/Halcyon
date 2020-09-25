@@ -1,0 +1,497 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# halcyon
+
+Halcyon is a self-care application for putting your mind and soul at ease
+through daily journaling and spontaneous messages with others.
+
+
+# Group Authorization
+
+## Guest [/auth/guest]
+
+### Request for guest account [POST]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Attributes (AuthResponse)
+
++ Response 500
+
+## Register [/auth/register]
+
+### Register with credentials [POST]
+
++ Request (application/json)
+
+    + Attributes (AuthRequest)
+
++ Response 200 (application/json)
+
+    + Attributes (AuthResponse)
+    
++ Response 400
+    
++ Response 409
+    
+        Username already taken
+
++ Response 500
+
+
+## Login [/auth/login]
+
+### Login with credentials [POST]
+
++ Request (application/json)
+
+    + Attributes (AuthRequest)
+
++ Response 200 (application/json)
+
+    + Attributes (AuthResponse)
+
++ Response 400
+    
++ Response 401
+
+        User not found
+
++ Response 401
+
+        Wrong password
+
+## Logout [/auth/logout]
+
+### Logout [DELETE]
+
++ Request (application/json)
+
+    + Attributes
+        - refreshToken (string)
+
++ Response 204
+    
++ Response 401
+
++ Response 500
+
+
+## Refresh token [/auth/token]
+
+### Refresh access token [POST]
+
++ Request (application/json)
+
+    + Attributes
+        - refreshToken (string)
+
++ Response 200
+    + Attributes
+        - accessToken (AccessToken)
+        
++ Response 400
+    
++ Response 403
+
+        Invalid token
+
++ Response 500
+
+## Facebook [/auth/facebook]
+
+### Login with facebook [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (AuthResponse)
+
++ Response 401
+
+        "Failed to login to Facebook"
+    
++ Response 500
+
+# Group Journal
+
+## Journal pages in a range [/journal/page/range{?start,end}]
+
+### GET [GET]
+
++ Parameters
+    + start: `2020-09-01` (string, required) - start date, inclusive, required
+    + end: `2020-09-30` (string, required) - end date, inclusive, required
+
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+    
+
++ Response 200 (application/json)
+
+    + Attributes (array[JournalPage])
+
++ Response 400
+
+    Missing start and end
+    
+    + Body
+
++ Response 404
+
+        No page between {start} and {end} found
+
++ Response 500
+
+
+## Journal page on a specific date [/journal/page{?date}]
+
++ Parameters
+    + date: `2020-09-19` (Date, required)
+    
+        Date of the journal page entry, in YYYY-MM-DD format.
+
+### GET [GET]
+
++ Request
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+    + Attributes (JournalPage)
+
++ Response 400
+
+    Missing date
+    
+    + Body
+
++ Response 404
+
+        No page on {date} found
+
++ Response 500
+
+### POST [POST]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+
+    + Attributes (JournalPage)
+
++ Response 200 (application/json)
+
++ Response 400
+
+    Missing date
+    
+    + Body
+
++ Response 500
+
+# Group Conversation
+
+## List of all of the user's conversations [/conversation/withUser]
+
+### GET [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+    + Attributes (array[Conversation])
+
+## Conversation with a specific ID [/conversation/{conversationId}]
+
+### GET [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+    + Attributes (Conversation)
+
+### DELETE [DELETE]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+## New conversation [/conversation/{?firstUserId,secondUserId}]
+
+### POST [POST]
+
++ Parameters
+    - firstUserId (AliceId)
+    - secondUserId(BobId)
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+    + Attributes (Conversation)
+
+# Group Message
+
+## Random unopened message [/message/randomUnopened]
+
+### GET [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+    + Attributes (Message)
+
+## Message with a specific ID [/message/{messageId}]
+
+### GET [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+    + Attributes (Message)
+
+### DELETE [DELETE]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+## All messages with a specific conversation ID [/message/withConversation/{conversationId}]
+
+### GET [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+    + Attributes (array[Message])
+
+## New unopened message [/message/{?userId,url}]
+
+### POST [POST]
+
++ Parameters
+    - userId (AliceId)
+    - url (MessageUrl)
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+    + Attributes (Message)
+
+## New message from a conversation [/message/withConversation{?userId,url,conversationId}]
+
+### POST [POST]
+
++ Parameters
+    - userId (AliceId)
+    - url (MessageUrl)
+    - conversationId (ConversationId)
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+    + Attributes (Message)
+
+## Open the specified message [/message/{messageId}/{?conversationId}]
+
+### PUT [PUT]
+
++ Parameters
+    - conversationId (ConversationId)
+    
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
++ Response 200 (application/json)
+
+    + Attributes (Message)
+
+# Group User
+
+## User profile [/user/profile]
+
+### GET [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+    + Attributes (User)
+
+
+### POST [POST]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+            
+    + Attributes
+        + username (string)
+        + password (string)
+        + name (string)
+
++ Response 200 (application/json)
+
+
+## Get list of users blocked by a user [/user/blocked]
+
+### GET [GET]
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+
++ Response 200 (application/json)
+
+    + Attributes (array[BlockedUser])
+
+## Block a user [/user/block{?id}]
+
+### POST [POST]
+
++ Parameters
+    - id (Id) - id of user to block
+
++ Request (application/json)
+    + Headers
+
+            Authentication: Bearer JWT
+        
+
++ Response 200 (application/json)
+
+
+# Data Structures
+
+## AuthRequest (object)
+- username: exampleUser123 (string, required)
+- password: password123 (string, required)
+
+## AuthResponse (User)
+- accessToken (AccessToken)
+- refreshToken (RefreshToken)
+
+## JournalBlock (object)
+- prompt (string)
+- content (string)
+
+## JournalPage (object)
+- weather: sunny (string)
+- location: sg (string)
+- prompt: What are you grateful for today? (string)
+- content: Mi familia (string)
+- mood: happy (string)
+
+## Conversation (object)
+- id (ConversationId)
+- first_user_id (AliceId)
+- second_user_id (BobId)
+
+## Message (object)
+- id (MessageId)
+- is_open (boolean)
+- url (MessageUrl)
+- createdAt (CreatedAt)
+- deletedAt (DeletedAt)
+- user_id (AliceId)
+- conversation_id (ConversationId)
+
+## BlockedUser (object)
+- id (Id)
+- name: john (string)
+- username: johnny (string)
+
+## User (object)
+- id (Id)
+- fbId: 1234567890873169 (string)
+- name: john (string)
+- alias: `simple-cat` (string)
+- username: johnny (string)
+
+## Date (string)
+`2020-09-19`
+
+## Id (string)
+`13ed88c3-a7c3-4aef-a688-8705895cca47`
+
+## AliceId (string)
+`edf92800-9981-4105-8187-b02c211a6fdf`
+
+## BobId (string)
+`3b1cf85c-2db3-4ec9-b9bc-37023097121e`
+
+## ConversationId (string)
+`3d8c5095-e897-4e8d-ac97-74b7f1be0c10`
+
+## MessageId (string)
+`56a72976-ce77-44e1-aa9b-7c55a071a65b`
+
+## MessageUrl (string)
+`apiary.com`
+
+## CreatedAt (string)
+`2020-09-19T09:13:26.646Z`
+
+## DeletedAt (string)
+null
+
+## Token (string)
+`aaAbbCciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDA0MTMwODAxNjMsImV4cCI6MTYwMDQxMzE2NjU2M30.3zapZc7hXakM3xFZlkunOXH5BOYmMpZkGZVPtz-Sm8M`
+
+## AccessToken (object)
+- token (Token)
+- expiresIn (string)
+
+## RefreshToken (Token)

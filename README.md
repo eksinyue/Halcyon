@@ -8,7 +8,7 @@ Public Link on Netlify at [https://halcyon.caephler.com](https://halcyon.caephle
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/47fe2fd9-b6a2-4c9d-a9ac-f06e673bbe56/deploy-status)](https://app.netlify.com/sites/pwa-halcyon/deploys)
 
-Backend API hosted on [Heroku](https://agile-peak-18205.herokuapp.com/)
+Backend API hosted on Heroku
 
 ## Team members and contributions
 
