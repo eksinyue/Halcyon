@@ -12,12 +12,12 @@ Backend API hosted on Heroku
 
 ## Team members and contributions
 
-| Name                 | Matric Number | Role                              |
-| -------------------- | ------------- | --------------------------------- |
-| Adam Chew Yong Soon  | A0169886B     | Backend, Database, Authentication |
-| Gabriel Tan Chuan En | A0166733Y     | Frontend, UI/UX                   |
-| He Xinyue            | A0204712U     | Art and Design, UI/UX             |
-| Lim Yong Shen, Kevin | A0183562B     | Backend, Docker, Deployment       |
+| Name                 | Role                              |
+| -------------------- | --------------------------------- |
+| Adam Chew Yong Soon  | Backend, Database, Authentication |
+| Gabriel Tan Chuan En | Frontend, UI/UX                   |
+| He Xinyue            | Art and Design, UI/UX             |
+| Lim Yong Shen, Kevin | Backend, Docker, Deployment       |
 
 ## Deploying Locally
 
